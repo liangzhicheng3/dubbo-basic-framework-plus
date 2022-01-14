@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  #处理第一次请求访问延迟问题
+  mvc:
+    servlet:
+      load-on-startup: 1
+  profiles:
+    active: dev
+
+dubbo:
+  application:
+    name: user-consumer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20880
+
+aes:
+  algorithm: AES/ECB/PKCS5Padding #算法
+  secret: 104982ebf97f44b5 #密钥（需要前端和后端保持一致）
+
+swagger:
+  application-name: ${dubbo.application.name}
+  application-version: 1.0.0
+  application-description: 用户消费者接口文档
